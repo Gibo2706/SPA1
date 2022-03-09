@@ -3,6 +3,7 @@ public class Start {
         Jpl list = new Jpl();
         list.insertFirst("elem");
         list.printFirstToLast();
+        Svetovid.out.println(list);
     }
 }
 
@@ -43,6 +44,16 @@ class Jpl {
             System.out.println(curr.element);
             curr = curr.succ;
         }
+    }
+    public String toString() {
+        String rez = "Lista [ ";
+        SSLNode tek = firNode;
+        while (tek!=null) {
+            rez += tek.element + " ";
+            tek = tek.succ;
+        }
+        rez += " ]";
+        return rez;
     }
 }
 
