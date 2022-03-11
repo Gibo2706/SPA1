@@ -77,7 +77,7 @@ class Knjiga{
     }
     public String toString(){
         String red = new String();
-        red = naslov + ime + godina;
+        red = naslov + " " + ime + " " + godina;
         return red;
     }
 }
