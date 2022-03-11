@@ -21,6 +21,15 @@ public class Zad01{
             Svetovid.out.println("Spisak je prazan.");
         }
     }
+    static void brojiKnjigeDoGodine(Knjiga[] spisak, int godina){
+        int brojac = 0;
+        if(spisak == null) return;
+        for(int i = 0; i<=Knjiga.lastIndex();i++){
+            if(spisak[i].godina<godina)
+                brojac++;
+        }
+        Svetovid.out.println("Pre date godine ima tacno: " + brojac + " knjiga");
+    }
     public static void main(String[] args) {
         String file = Svetovid.in.readLine("Unesite ime fajla: ");
         ucitavanje(file);
@@ -30,7 +39,10 @@ public class Zad01{
         String ime = Svetovid.in.readLine("Unesite ime pisca: ");
         int godina = Svetovid.in.readInt("Unesite godinu kad je knjiga objavljena: ");
         spisak[lastIndex] = new Knjiga(naslov, ime, godina);
+        lastIndex++;
         saveArrayToFile("output.txt", spisak);
+        int traziPoGodini = Svetovid.in.readInt("Do koje godine trazite: ");
+        brojiKnjigeDoGodine(spisak, traziPoGodini);
     }
 }
 
