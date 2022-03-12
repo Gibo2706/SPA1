@@ -1,6 +1,4 @@
 public class Zad01{
-    final static int MAX_KNJIGA = 1000;
-    
     static void ucitavanje(String file){
         if(Svetovid.testIn(file)){
             while(Svetovid.in(file).hasMore()){
@@ -12,7 +10,7 @@ public class Zad01{
     }
     static void saveArrayToFile(String file, Knjiga[] spisak){
         if(spisak != null){
-            for(int i = 0 ; i<=Knjiga.lastIndex(); i++){
+            for(int i = 0 ; i<Knjiga.lastIndex(spisak); i++){
                 Svetovid.out(file).println(spisak[i]);
             }
             Svetovid.out(file).close();
@@ -24,8 +22,8 @@ public class Zad01{
     static void brojiKnjigeDoGodine(Knjiga[] spisak, int godina){
         int brojac = 0;
         if(spisak == null) return;
-        for(int i = 0; i<=Knjiga.lastIndex();i++){
-            if(spisak[i].godina<godina)
+        for(int i = 0; i<Knjiga.lastIndex(spisak);i++){
+            if(spisak[i].godina <= godina)
                 brojac++;
         }
         Svetovid.out.println("Pre date godine ima tacno: " + brojac + " knjiga");
@@ -34,12 +32,11 @@ public class Zad01{
         String file = Svetovid.in.readLine("Unesite ime fajla: ");
         ucitavanje(file);
         Knjiga[] spisak = Knjiga.ucitajKnjige(file);
-        int lastIndex = Knjiga.lastIndex();
+        int lastIndex = Knjiga.lastIndex(spisak);
         String naslov = Svetovid.in.readLine("Unesite ime knjige: ");
         String ime = Svetovid.in.readLine("Unesite ime pisca: ");
         int godina = Svetovid.in.readInt("Unesite godinu kad je knjiga objavljena: ");
         spisak[lastIndex] = new Knjiga(naslov, ime, godina);
-        lastIndex++;
         saveArrayToFile("output.txt", spisak);
         int traziPoGodini = Svetovid.in.readInt("Do koje godine trazite: ");
         brojiKnjigeDoGodine(spisak, traziPoGodini);
@@ -56,9 +53,9 @@ class Knjiga{
         this.naslov = nsl;
         this.ime = im;
     }
-    static int brojac = 0;
+
     static Knjiga[] ucitajKnjige(String file){
-        brojac = 0;
+        int brojac = 0;
         Knjiga[] spisak = new Knjiga[MAX_KNJIGA];
         if(Svetovid.testIn(file)){
             while(Svetovid.in(file).hasMore()){
@@ -72,12 +69,19 @@ class Knjiga{
         }
         return spisak;
     }
-    static int lastIndex(){
-        return brojac;
+
+    static int lastIndex(Knjiga[] spisak){
+        int brj = 0;
+        for(int i = 0; i <= MAX_KNJIGA; i++){
+            if(spisak[i]==null){
+                brj = i;
+                break;
+            }
+        }
+        return brj;
     }
+
     public String toString(){
-        String red = new String();
-        red = naslov + " " + ime + " " + godina;
-        return red;
+        return naslov + " " + ime + " " + godina;
     }
 }
