@@ -1,8 +1,9 @@
 public class VezbanjeZaKol01 {
     public static void main(String[] args) {
-        String file = Svetovid.in.readLine("Unesite ime fajla: ");
+        String file = "files/" + Svetovid.in.readLine("Unesite ime fajla: ");
         SpisakStudenata spisak = new SpisakStudenata();
         spisak.ucitajStudente(file);
+        Svetovid.out.println("----Unos studenta----");
         spisak.dodajStudenta(Svetovid.in.readLine("Unesite prezime: "), Svetovid.in.readLine("Unesite ime: "),
                 Svetovid.in.readInt("Unesite godiste: "));
         spisak.ispisiStudenteConsole();
@@ -80,7 +81,6 @@ class SpisakStudenata {
             Svetovid.out.println("Maximum broj studenata je dostignut. Student nije dodat!");
             return;
         }
-        Svetovid.out.println("----Unos studenta----");
         spisak[brStud] = Student.upisiStudenta(prezime, ime, godiste);
         Svetovid.out.println("Student je uspesno dodat.");
         brStud++;

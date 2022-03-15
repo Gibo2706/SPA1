@@ -29,7 +29,7 @@ public class Zad01{
         Svetovid.out.println("Pre date godine ima tacno: " + brojac + " knjiga");
     }
     public static void main(String[] args) {
-        String file = Svetovid.in.readLine("Unesite ime fajla: ");
+        String file = "files/" + Svetovid.in.readLine("Unesite ime fajla: ");
         ucitavanje(file);
         Knjiga[] spisak = Knjiga.ucitajKnjige(file);
         int lastIndex = Knjiga.lastIndex(spisak);
