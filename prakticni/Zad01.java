@@ -1,45 +1,17 @@
 public class Zad01{
-    static void ucitavanje(String file){
-        if(Svetovid.testIn(file)){
-            while(Svetovid.in(file).hasMore()){
-                String red = Svetovid.in(file).readLine();
-                Svetovid.out.println(red);
-            }
-            Svetovid.in(file).close();
-        }
-    }
-    static void saveArrayToFile(String file, Knjiga[] spisak){
-        if(spisak != null){
-            for(int i = 0 ; i<Knjiga.lastIndex(spisak); i++){
-                Svetovid.out(file).println(spisak[i]);
-            }
-            Svetovid.out(file).close();
-            Svetovid.out.println("Uspesno upisano u fajl: " + file);
-        }else{
-            Svetovid.out.println("Spisak je prazan.");
-        }
-    }
-    static void brojiKnjigeDoGodine(Knjiga[] spisak, int godina){
-        int brojac = 0;
-        if(spisak == null) return;
-        for(int i = 0; i<Knjiga.lastIndex(spisak);i++){
-            if(spisak[i].godina <= godina)
-                brojac++;
-        }
-        Svetovid.out.println("Pre date godine ima tacno: " + brojac + " knjiga");
-    }
     public static void main(String[] args) {
         String file = "files/" + Svetovid.in.readLine("Unesite ime fajla: ");
-        ucitavanje(file);
-        Knjiga[] spisak = Knjiga.ucitajKnjige(file);
-        int lastIndex = Knjiga.lastIndex(spisak);
-        String naslov = Svetovid.in.readLine("Unesite ime knjige: ");
-        String ime = Svetovid.in.readLine("Unesite ime pisca: ");
-        int godina = Svetovid.in.readInt("Unesite godinu kad je knjiga objavljena: ");
-        spisak[lastIndex] = new Knjiga(naslov, ime, godina);
-        saveArrayToFile("output.txt", spisak);
-        int traziPoGodini = Svetovid.in.readInt("Do koje godine trazite: ");
-        brojiKnjigeDoGodine(spisak, traziPoGodini);
+        String fileO = "files/output/SpisakKnjiga.txt";
+        SpisakKnjiga spisak = new SpisakKnjiga();
+        spisak.ucitajKnjige(file);
+        spisak.ispisNaEkran();
+        Svetovid.out.println("-----Unos Knjige----");
+        spisak.dodajKnjigu(Svetovid.in.readLine("Unesite naslov knjige: "), 
+                Svetovid.in.readLine("Unesite prezime pisca knjige: "), 
+                Svetovid.in.readInt("Unesite godinu izdavanja: "));
+        spisak.ispisUFile(fileO);
+        spisak.ispisPoPiscu(Svetovid.in.readLine("Unesite prezime pisca: "));
+        spisak.traziPoGodini(Svetovid.in.readInt("Unesite godinu: "));
     }
 }
 
@@ -54,34 +26,90 @@ class Knjiga{
         this.ime = im;
     }
 
-    static Knjiga[] ucitajKnjige(String file){
-        int brojac = 0;
-        Knjiga[] spisak = new Knjiga[MAX_KNJIGA];
-        if(Svetovid.testIn(file)){
-            while(Svetovid.in(file).hasMore()){
-                String naslov = Svetovid.in(file).readToken();
-                String ime = Svetovid.in(file).readToken();
-                int godina = Svetovid.in(file).readInt();
-                spisak[brojac] = new Knjiga(naslov, ime, godina);
-                brojac++;
-            }
-            Svetovid.in(file).close();
-        }
-        return spisak;
-    }
-
-    static int lastIndex(Knjiga[] spisak){
-        int brj = 0;
-        for(int i = 0; i <= MAX_KNJIGA; i++){
-            if(spisak[i]==null){
-                brj = i;
-                break;
-            }
-        }
-        return brj;
+    public static Knjiga dodajKnjigu(String nsl, String pr, int gd) {
+        return new Knjiga(nsl, pr, gd);
     }
 
     public String toString(){
         return naslov + " " + ime + " " + godina;
+    }
+}
+
+class SpisakKnjiga {
+    Knjiga[] spisak;
+    public static final int MAX_KNJIGA = 1000;
+    static int brojac;
+
+    public SpisakKnjiga() {
+        spisak = new Knjiga[MAX_KNJIGA];
+        brojac = 0;
+    }
+
+    public void ucitajKnjige(String file) {
+        if (!Svetovid.testIn(file)) {
+            Svetovid.out.println("Greska prilikom ucitavanja spiska.");
+            return;
+        }
+        while (Svetovid.in(file).hasMore()) {
+            if (brojac > MAX_KNJIGA)
+                break;
+            spisak[brojac] = Knjiga.dodajKnjigu(Svetovid.in(file).readToken(), Svetovid.in(file).readToken(),
+                    Svetovid.in(file).readInt());
+            brojac++;
+        }
+    }
+
+    public void ispisNaEkran() {
+        for (int i = 0; i < brojac; i++) {
+            Svetovid.out.println(spisak[i]);
+        }
+    }
+
+    public void ispisUFile(String fileO) {
+        for (int i = 0; i < brojac; i++) {
+            Svetovid.out(fileO).println(spisak[i].naslov + " " + spisak[i].ime + " " + spisak[i].godina);
+        }
+        Svetovid.out(fileO).close();
+    }
+
+    public void dodajKnjigu(String nsl, String pr, int gd) {
+        if (!(brojac < MAX_KNJIGA)) {
+            Svetovid.out.println("Maksimalan broj studenata je dostignut.");
+            return;
+        }
+        spisak[brojac] = Knjiga.dodajKnjigu(nsl, pr, gd);
+        brojac++;
+    }
+
+    public void ispisPoPiscu(String pisac) {
+        for (int i = 0; i < brojac; i++) {
+            if (spisak[i].ime.equalsIgnoreCase(pisac)) {
+                Svetovid.out.println(spisak[i]);
+            }
+        }
+    }
+
+    public void traziPoGodini(int god){
+        int prbr = 0;
+        for (int i = 0; i < brojac; i++) {
+            if(spisak[i].godina < god){
+                prbr++;
+            }
+        }
+        if(prbr != 0)
+            Svetovid.out.println("Pre zadate godine ima: " + prbr + " knjiga");
+        else    
+            Svetovid.out.println("Nema knjiga izdatih pre te godine");
+    }
+
+    public String toString() {
+        String izl = "Spisak [ ";
+        if (brojac > 0)
+            izl += spisak[0];
+        for (int i = 1; i < spisak.length; i++) {
+            izl += ", " + spisak[i];
+        }
+        izl += " ]";
+        return izl;
     }
 }
