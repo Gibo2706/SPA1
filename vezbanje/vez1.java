@@ -52,9 +52,9 @@ class vez1 {
     }
 
     public static void main(String[] args) {
-        prviZad("files/fajl01.txt");
-        drugiZad("files/fajl01.txt");
-        treciZad("files/brojevi.txt");
-        cetvrtiZad("files/imena.txt");
+        prviZad("files/input/fajl01.txt");
+        drugiZad("files/input/fajl01.txt");
+        treciZad("files/input/brojevi.txt");
+        cetvrtiZad("files/input/imena.txt");
     }
 }

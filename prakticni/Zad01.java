@@ -1,6 +1,6 @@
 public class Zad01{
     public static void main(String[] args) {
-        String file = "files/" + Svetovid.in.readLine("Unesite ime fajla: ");
+        String file = "files/input/" + Svetovid.in.readLine("Unesite ime fajla: ");
         String fileO = "files/output/SpisakKnjiga.txt";
         SpisakKnjiga spisak = new SpisakKnjiga();
         spisak.ucitajKnjige(file);

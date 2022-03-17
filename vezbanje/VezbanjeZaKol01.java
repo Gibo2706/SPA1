@@ -10,7 +10,7 @@ public class VezbanjeZaKol01 {
         int god = Svetovid.in.readInt("Unesite godinu na osnovu koje zelite izlistavanje: ");
         spisak.ispisiStudSaGodinom(god);
         Svetovid.out.println("Broj studenata pre date godine je: " + spisak.prebrojPreGod(god));
-        spisak.ispisiStudenteFile("vezbanje/VezbanjeSaStudentima.txt");
+        spisak.ispisiStudenteFile("files/output/VezbanjeSaStudentima.txt");
     }
 }
 
