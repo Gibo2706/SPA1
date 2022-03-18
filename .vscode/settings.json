@@ -9,6 +9,7 @@
     "java.project.sourcePaths": [
         "vezbanje",
         "predavanja",
-        "prakticni"
+        "prakticni",
+        "kolokvijum"
     ]
 }
