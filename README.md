@@ -13,6 +13,9 @@
  Rad sa fajlovima i klasama  
  Datum 18.03.2022.  
  
- ## Trece prakticne vezbe
+## Trece prakticne vezbe
  Rad sa listama i fajlovima; vezbanje za prakticni    
  Datum 25.03.2022.  
+## Trece prakticne vezbe
+ Rad prakticnog zadatka; dodatni bodovi      
+ Datum 01.04.2022.

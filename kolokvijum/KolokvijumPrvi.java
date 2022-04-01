@@ -12,6 +12,7 @@ public class KolokvijumPrvi {
                 Svetovid.in.readLine("Unesite naziv drugog sliva: "));
         mreza.ispisNaEkran();
         mreza.ispisUFile(fOutput);
+
     }
 }
 

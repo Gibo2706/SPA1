@@ -1,19 +1,19 @@
 public class VezbeListe {
     public static void main(String[] args) {
         Lista lista = new Lista();
-        // int n = Svetovid.in.readInt("Unesite broj korisnika: ");
-        // for (int i = 0; i < n; i++) {
-        //     lista.inserFirt(Svetovid.in.readLine("Unesite "+ (i+1) + " korisnika"));
-        // }
-        // lista.printFirstToLast();
-        // lista.printLongerThan3();
-        // lista.findString(Svetovid.in.readLine("Unesite string: "));
-        // lista.printOnlyLast();
-        String file = "files/input/imena.txt";
-        String fileO = "file/output/liste.txt";
-        lista.insertFromFile(file);
-        lista.findString(Svetovid.in.readLine("Unesite ime: "));
-        lista.saveToFile(fileO);
+        int n = Svetovid.in.readInt("Unesite broj korisnika: ");
+        for (int i = 0; i < n; i++) {
+            lista.inserFirt(Svetovid.in.readLine("Unesite "+ (i+1) + " korisnika"));
+        }
+        lista.printFirstToLast();
+        lista.printLongerThan3();
+        lista.findString(Svetovid.in.readLine("Unesite string: "));
+        lista.printOnlyLast();
+        // String file = "files/input/imena.txt";
+        // String fileO = "file/output/liste.txt";
+        // lista.insertFromFile(file);
+        // lista.findString(Svetovid.in.readLine("Unesite ime: "));
+        // lista.saveToFile(fileO);
     }
 }
 
@@ -74,6 +74,7 @@ class Lista {
             if (curr.element.length() > 3) {
                 Svetovid.out.println(curr.element);
             }
+            curr = curr.succ;
         }
     }
 
@@ -84,6 +85,7 @@ class Lista {
             if (curr.element.equals(find)) {
                 counter++;
             }
+            curr = curr.succ;
         }
         if(counter != 0)
             Svetovid.out.println("Ima ukupno " + counter + " takvih objekata.");
