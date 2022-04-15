@@ -18,4 +18,7 @@
  Datum 25.03.2022.  
 ## Trece prakticne vezbe
  Rad prakticnog zadatka; dodatni bodovi      
- Datum 01.04.2022.
+ Datum 01.04.2022.  
+## Cetvrte prakticne vezbe
+ Rad sa JPL i listama listi; vezbanje za prakticni i kolokvijum  
+ Datum 15.05.2022. 
