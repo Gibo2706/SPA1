@@ -140,6 +140,16 @@ class MoviesList {
         }
     }
 
+    public void printMoviesWhereNameIs(String name) {
+        Movie cur = this.first;
+        while (cur != null) {
+            if (cur.title.equalsIgnoreCase(name)) {
+                Svetovid.out.println(cur);
+            }
+            cur = cur.next;
+        }
+    }
+
     public void printMovies() {
         Movie cur = this.first;
         while (cur != null) {
@@ -161,6 +171,7 @@ class MoviesList {
     }
 
 
+
     public String toString() {
         String rez = "Filmovi [";
         Movie cur = this.first;
@@ -172,3 +183,5 @@ class MoviesList {
         return rez;
     }
 }
+
+
