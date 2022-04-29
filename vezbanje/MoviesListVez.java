@@ -86,7 +86,7 @@ class MoviesList {
         }
 
         public String toString() {
-            String rez = "Glumci [";
+            String rez = "Glumci [ ";
             Actor cur = this.first;
             while (cur != null) {
                 rez += cur.fullName + " ";

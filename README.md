@@ -23,4 +23,8 @@
 
 ## Pete prakticne vezbe
  Rad sa JPL i listama listi; vezbanje za prakticni i kolokvijum  
- Datum 15.05.2022. 
+ Datum 15.04.2022. 
+
+## Seste prakticne vezbe
+ Izrada prakticnog zadatka; dodatni bodovi  
+ Datum 29.04.2022.  

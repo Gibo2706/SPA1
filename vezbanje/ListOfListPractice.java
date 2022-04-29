@@ -31,10 +31,16 @@ class MailList {
             this.next = next;
         }
 
+        //add mail
+        public void addMail(String sender, String recipient, String subject, String body) {
+            Mail mail = new Mail(sender, recipient, subject, body, this);
+            this.next = mail;
+        }
+
         public String toString() {
-            String rez = "Mail ";
+            String rez = "Mail [";
             rez += sender + " " + recipient + " " + subject + " " + body;
-            return rez;
+            return rez + "]";
         }
 
         public void printMail() {
@@ -72,6 +78,211 @@ class MailList {
         }
         return null;
     }
+
+    public void deleteMail(String sender, String recipient, String subject, String body) {  // delete mail with given sender, recipient, subject and body   
+        Mail cur = this.first;
+        Mail prev = null;
+        while (cur != null) {
+            if (cur.sender.equalsIgnoreCase(sender) && cur.recipient.equalsIgnoreCase(recipient) && cur.subject.equalsIgnoreCase(subject) && cur.body.equalsIgnoreCase(body)) {
+                if (prev == null) {
+                    this.first = cur.next;
+                } else {
+                    prev.next = cur.next;
+                }
+                return;
+            }
+            prev = cur;
+            cur = cur.next;
+        }
+        Svetovid.out.println("Nije pronadjen mail!");
+    }
+    
+
+    public void printMailList() {
+        Mail cur = this.first;
+        while (cur != null) {
+            cur.printMail();
+            cur = cur.next;
+        }
+    }
+
+    // delete mail by phone number
+    public void deleteMailByPhoneNumber(String phoneNumber) {
+        Mail cur = this.first;
+        Mail prev = null;
+        while (cur != null) {
+            if (cur.sender.equalsIgnoreCase(phoneNumber) || cur.recipient.equalsIgnoreCase(phoneNumber)) {
+                if (prev == null) {
+                    this.first = cur.next;
+                } else {
+                    prev.next = cur.next;
+                }
+                return;
+            }
+            prev = cur;
+            cur = cur.next;
+        }
+        Svetovid.out.println("Nije pronadjen mail!");
+    }
+
+    public void deleteMailBySubject(String subject) {
+        Mail cur = this.first;
+        Mail prev = null;
+        while (cur != null) {
+            if (cur.subject.equalsIgnoreCase(subject)) {
+                if (prev == null) {
+                    this.first = cur.next;
+                } else {
+                    prev.next = cur.next;
+                }
+                return;
+            }
+            prev = cur;
+            cur = cur.next;
+        }
+        Svetovid.out.println("Nije pronadjen mail!");
+    }
+
+    public void deleteMailByBody(String body) {
+        Mail cur = this.first;
+        Mail prev = null;
+        while (cur != null) {
+            if (cur.body.equalsIgnoreCase(body)) {
+                if (prev == null) {
+                    this.first = cur.next;
+                } else {
+                    prev.next = cur.next;
+                }
+                return;
+            }
+            prev = cur;
+            cur = cur.next;
+        }
+        Svetovid.out.println("Nije pronadjen mail!");
+    }
+
+    public void deleteMailBySender(String sender) {
+        Mail cur = this.first;
+        Mail prev = null;
+        while (cur != null) {
+            if (cur.sender.equalsIgnoreCase(sender)) {
+                if (prev == null) {
+                    this.first = cur.next;
+                } else {
+                    prev.next = cur.next;
+                }
+                return;
+            }
+            prev = cur;
+            cur = cur.next;
+        }
+        Svetovid.out.println("Nije pronadjen mail!");
+    }
+
+    public void deleteMailByRecipient(String recipient) {
+        Mail cur = this.first;
+        Mail prev = null;
+        while (cur != null) {
+            if (cur.recipient.equalsIgnoreCase(recipient)) {
+                if (prev == null) {
+                    this.first = cur.next;
+                } else {
+                    prev.next = cur.next;
+                }
+                return;
+            }
+            prev = cur;
+            cur = cur.next;
+        }
+        Svetovid.out.println("Nije pronadjen mail!");
+    }
+
+    public void deleteMailBySenderAndRecipient(String sender, String recipient) {
+        Mail cur = this.first;
+        Mail prev = null;
+        while (cur != null) {
+            if (cur.sender.equalsIgnoreCase(sender) && cur.recipient.equalsIgnoreCase(recipient)) {
+                if (prev == null) {
+                    this.first = cur.next;
+                } else {
+                    prev.next = cur.next;
+                }
+                return;
+            }
+            prev = cur;
+            cur = cur.next;
+        }
+        Svetovid.out.println("Nije pronadjen mail!");
+    }
+
+    public void deleteMailBySenderAndSubject(String sender, String subject) {
+        Mail cur = this.first;
+        Mail prev = null;
+        while (cur != null) {
+            if (cur.sender.equalsIgnoreCase(sender) && cur.subject.equalsIgnoreCase(subject)) {
+                if (prev == null) {
+                    this.first = cur.next;
+                } else {
+                    prev.next = cur.next;
+                }
+                return;
+            }
+            prev = cur;
+            cur = cur.next;
+        }
+        Svetovid.out.println("Nije pronadjen mail!");
+    }
+
+    public void deleteMailBySenderAndBody(String sender, String body) {
+        Mail cur = this.first;
+        Mail prev = null;
+        while (cur != null) {
+            if (cur.sender.equalsIgnoreCase(sender) && cur.body.equalsIgnoreCase(body)) {
+                if (prev == null) {
+                    this.first = cur.next;
+                } else {
+                    prev.next = cur.next;
+                }
+                return;
+            }
+            prev = cur;
+            cur = cur.next;
+        }
+        Svetovid.out.println("Nije pronadjen mail!");
+    }
+
+    //add mail (Mail)
+    public void addMail(Mail mail) {
+        Mail cur = this.first;
+        Mail prev = null;
+        while (cur != null) {
+            if (cur.sender.equalsIgnoreCase(mail.sender) && cur.recipient.equalsIgnoreCase(mail.recipient) && cur.subject.equalsIgnoreCase(mail.subject) && cur.body.equalsIgnoreCase(mail.body)) {
+                Svetovid.out.println("Mail vec postoji!");
+                return;
+            }
+            prev = cur;
+            cur = cur.next;
+        }
+        if (prev == null) {
+            this.first = mail;
+        } else {
+            prev.next = mail;
+        }
+    }
+
+    // forward mail to another recipient
+    public void forwardMail(String sender, String recipient, String subject, String body) {
+        Mail cur = this.first;
+        while (cur != null) {
+            if (cur.sender.equalsIgnoreCase(sender) && cur.recipient.equalsIgnoreCase(recipient) && cur.subject.equalsIgnoreCase(subject) && cur.body.equalsIgnoreCase(body)) {
+                Mail mail = new Mail(cur.sender, cur.recipient, cur.subject, cur.body, null);
+                this.addMail(mail);
+                return;
+            }
+            cur = cur.next;
+        }
+        Svetovid.out.println("Nije pronadjen mail!");
+    }    
 
     public String toString() {
         String rez = "Mailovi [";
