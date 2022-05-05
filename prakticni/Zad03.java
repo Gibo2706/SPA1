@@ -15,7 +15,6 @@ public class Zad03 {
         list.addToy(0, "wooden", "desc for this toy");
         list.addToy(0, "metal", "desc for this toy");
         list.addToy(0, "wooden", "desc for this toy");
-        list.addToy(0, "plastic", "desc for this toy");
         list.addToy(0, "wooden", "desc for this toy");
 
         // Toys box 1
@@ -190,39 +189,39 @@ class Playground {
         }
         System.out.println("Box with the most toys of the given type is " + pom);
     }
-
-    public void moveAllGivenToysToLastBox(String type) {
-        if (first != null) {
-            Box last = first, tmp = first;
-            while (tmp != null) {
-                last = tmp;
-                tmp = tmp.link;
-            }
-            tmp = first;
-            while (tmp != last) {
-                if (tmp.first != null) {
-                    Toy tek = tmp.first, post = tmp.first;
-                    while (tek != null) {
-                        post = tek;
-                        if (tek.type.equalsIgnoreCase(type)) {
-                            if (last.first != null) {
-                                tek.link = last.first.link;
-                                last.first = tek;
-                                tek = post.link;
-                            } else {
-                                last.first = tek;
-                                tek.link = null;
-                                last.first.link = tek.link;
-                                tek = post.link;
-                            }
-                        }
-                        tek = tek.link;
-                    }
-                }
-                tmp = tmp.link;
-            }
-        }
-    }
+    
+    // public void moveAllGivenToysToLastBox(String type) {
+    //     if (first != null) {
+    //         Box last = first, tmp = first;
+    //         while (tmp != null) {
+    //             last = tmp;
+    //             tmp = tmp.link;
+    //         }
+    //         tmp = first;
+    //         while (tmp != last) {
+    //             if (tmp.first != null) {
+    //                 Toy tek = tmp.first, post = tmp.first;
+    //                 while (tek != null) {
+    //                     post = tek;
+    //                     if (tek.type.equalsIgnoreCase(type)) {
+    //                         if (last.first != null) {
+    //                             tek.link = last.first.link;
+    //                             last.first = tek;
+    //                             tek = post.link;
+    //                         } else {
+    //                             last.first = tek;
+    //                             tek.link = null;
+    //                             last.first.link = tek.link;
+    //                             tek = post.link;
+    //                         }
+    //                     }
+    //                     tek = tek.link;
+    //                 }
+    //             }
+    //             tmp = tmp.link;
+    //         }
+    //     }
+    // }
 
     // Help by github/vjxdev
     public void moveTypeToLastBox(String type) {
@@ -234,7 +233,7 @@ class Playground {
             lastBox = lastBox.link;
         }
 
-        Box currBox = first;
+        Box currBox = first, prevBox = first;
         // Prolazak kroz sve kutije
         while (currBox.link != null) {
             // Prebacivanje sa pocetka
@@ -259,10 +258,20 @@ class Playground {
                         lastBox.first = curr;
 
                         curr = prev;
+
                     }
                 }
             }
+            // brisanje praznih kutija
+            if(first.first == null) {
+                first = currBox.link;
+            }
 
+            if (currBox.first == null) {
+                prevBox.link = currBox.link;
+                currBox = prevBox;
+            }
+            prevBox = currBox;
             currBox = currBox.link;
         }
     }
