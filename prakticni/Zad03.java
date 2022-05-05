@@ -1,318 +1,285 @@
 public class Zad03 {
     public static void main(String[] args) {
-        Igraonica igraonica = new Igraonica();
-        // Test igraonica class
-        // insert boxes in igraonica, insert toys in boxes, print igraonica
-        // id: 1,2,3,4,...,n
-        // box: box1, box2, box3, box4,...,boxn
-        // toy: toy1, toy2, toy3, toy4,...,toyn
-        // type: wooden, plastic, metal,
-        // color: red, green, blue,
-        // desc: description1, description2, description3, description4,...,descriptionn
-        // n = 10
-        igraonica.insertBox(1, "red");
-        igraonica.insertBox(2, "green");
-        igraonica.insertBox(4, "red");
-        igraonica.insertBox(5, "green");
+        Playground list = new Playground();
 
-        igraonica.insertToy(1, "1wooden", "description1");
-        igraonica.insertToy(2, "2plastic", "description2");
-        igraonica.insertToy(4, "3metal", "description4");
-        igraonica.insertToy(5, "1plastic", "description5");
-        igraonica.insertToy(1, "5wooden", "description6");
-        igraonica.insertToy(1, "9plastic", "description7");
-        igraonica.insertToy(1, "5metal", "description8");
-        igraonica.insertToy(1, "1metal", "description9");
-        igraonica.insertToy(1, "2metal", "description9");
-        igraonica.insertToy(1, "3metal", "description9");
-        igraonica.insertToy(1, "3metal", "description9");
-        igraonica.insertToy(1, "2metal", "description9");
-        igraonica.insertToy(1, "1metal", "description9");
-        igraonica.insertToy(1, "9metal", "description9");
+        // Boxes
+        list.addBox(0, "Blue");
+        list.addBox(1, "Red");
+        list.addBox(2, "Green");
+        list.addBox(3, "Pink");
 
-        // print igraonica
-        System.out.println(igraonica);
+        // Test if there is same id
+        list.addBox(0, "Blue");
 
-        // print box with the most toys of given type
-        System.out.println("Box with the most toys of given type:");
-        igraonica.printBoxWithMostToys("wooden");
+        // Toys box 0
+        list.addToy(0, "wooden", "desc for this toy");
+        list.addToy(0, "metal", "desc for this toy");
+        list.addToy(0, "wooden", "desc for this toy");
+        list.addToy(0, "plastic", "desc for this toy");
+        list.addToy(0, "wooden", "desc for this toy");
 
-        igraonica.moveToysToLastBox();
-        System.out.println(igraonica);
+        // Toys box 1
+        list.addToy(1, "wooden", "desc for this toy");
+        list.addToy(1, "plastic", "desc for this toy");
+        list.addToy(1, "plastic", "desc for this toy");
+        list.addToy(1, "plastic", "desc for this toy");
+        list.addToy(1, "wooden", "desc for this toy");
+
+        // Toys box 2
+        list.addToy(2, "wooden", "desc for this toy");
+        list.addToy(2, "wooden", "desc for this toy");
+        list.addToy(2, "wooden", "desc for this toy");
+        list.addToy(2, "wooden", "desc for this toy");
+        list.addToy(2, "wooden", "desc for this toy");
+
+        // Toys box 3
+        list.addToy(3, "metal", "desc for this toy");
+        list.addToy(3, "wooden", "desc for this toy");
+        list.addToy(3, "wooden", "desc for this toy");
+
+        System.out.println(list);
+
+        System.out.println();
+
+        // Test for printing box with the most toys of the given type
+        list.moveTypeToLastBox("wooden");
+        System.out.println();
+
+        Svetovid.out.println("-----------------------------");
+        // Test for moving toys
+        list.moveTypeToLastBox("metal");
+        System.out.println(list);
+
+        Svetovid.out.println("-----------------------------");
+        System.out.println();
 
     }
 }
 
-class Igraonica {
-    class Toy{
-        String type;
-        String desc;
-        Toy next;
+class Playground {
+    class Toy {
+        String type, desc;
+        Toy link;
 
-        Toy(String type, String desc) {
+        public Toy(String type, String desc) {
             this.type = type;
             this.desc = desc;
+            this.link = null;
         }
 
         public String toString() {
-            return type + " " + desc;
+            return "Type: " + type ;//+ " Desc: " + desc;
         }
     }
 
-    class ToysList{
-        Toy first;
-
-        ToysList() {
-            this.first = null;
-        }
-
-        // insert toy by type
-        public void insertToy(String type, String desc) {
-            Toy novi = new Toy(type, desc);
-            novi.next = this.first;
-            this.first = novi;
-        }
-
-        // insert toy and sort by type
-        public void insertToyAndSort(String type, String desc) {
-            Toy novi = new Toy(type, desc);
-            Toy temp = this.first;
-            if (this.first == null) {
-                this.first = novi;
-                return;
-            }
-            if (this.first.type.compareTo(type) > 0) {
-                novi.next = this.first;
-                this.first = novi;
-                return;
-            }
-            while (temp.next != null) {
-                if (temp.next.type.compareTo(type) > 0) {
-                    novi.next = temp.next;
-                    temp.next = novi;
-                    return;
-                }
-                temp = temp.next;
-            }
-            temp.next = novi;
-        }
-
-
-        public String isThereToy(String type) {
-            Toy cur = this.first;
-            while (cur != null) {
-                if (cur.type.equalsIgnoreCase(type)) {
-                    return cur.type;
-                }
-                cur = cur.next;
-            }
-            return null;
-        }
-
-        public String toString() {
-            String rez = "Igracke [ ";
-            Toy cur = this.first;
-            while (cur != null) {
-                rez += cur.toString() + " ";
-                cur = cur.next;
-            }
-            rez += "]";
-            return rez;
-        }
-
-        // sort toys by type
-        public void sortToys() {
-            Toy cur = this.first;
-            Toy next = cur.next;
-            Toy prev = null;
-            while (next != null) {
-                if (cur.type.compareTo(next.type) > 0) {
-                    if (prev == null) {
-                        this.first = next;
-                    } else {
-                        prev.next = next;
-                    }
-                    Toy tmp = cur;
-                    cur = next;
-                    next = tmp;
-                    tmp.next = cur.next;
-                    cur.next = tmp;
-                    prev = cur;
-                } else {
-                    prev = cur;
-                    cur = next;
-                    next = cur.next;
-                }
-            }
-        }
-
-    }
-
-    class Box{
+    class Box {
         int id;
         String color;
-        ToysList toys;
-        Box next;
+        Toy first;
+        Box link;
 
-        Box(int id, String color) {
+        public Box(int id, String color) {
             this.id = id;
             this.color = color;
-            this.toys = new ToysList();
-        }
-
-        public String toString() {
-            return "Box " + id + " " + color + " " + toys.toString();
-        }
-
-        public void insertToy(String type, String desc) {
-            toys.insertToyAndSort(type, desc);
-        }
-
-        public String isThereToy(String type) {
-            return toys.isThereToy(type);
-        }
-
-    }
-
-    class BoxesList{
-        Box first;
-
-        BoxesList() {
             this.first = null;
-        }
-
-        public void insertBox(int id, String color) {
-            Box cur = this.first;
-            while (cur != null) {
-                if (cur.id == id) {
-                    Svetovid.out.println("Vec postoji box!");
-                    return;
-                }
-                cur = cur.next;
-            }
-            Box novi = new Box(id, color);
-            novi.next = this.first;
-            this.first = novi;
-        }
-
-        public String isThereBox(int id) {
-            Box cur = this.first;
-            while (cur != null) {
-                if (cur.id == id) {
-                    return cur.color;
-                }
-                cur = cur.next;
-            }
-            return null;
-        }
-        
-        public void insertToy(int id, String type, String desc) {
-            Box cur = this.first;
-            while (cur != null) {
-                if (cur.id == id) {
-                    cur.insertToy(type, desc);
-                    return;
-                }
-                cur = cur.next;
-            }
-            Svetovid.out.println("Nema boxa sa tim id-om!");
-        }
-
-
-        public String isThereToy(int id, String type) {
-            Box cur = this.first;
-            while (cur != null) {
-                if (cur.id == id) {
-                    return cur.isThereToy(type);
-                }
-                cur = cur.next;
-            }
-            return null;
+            this.link = null;
         }
 
         public String toString() {
-            String rez = "Boxes [ ";
-            Box cur = this.first;
-            while (cur != null) {
-                rez += cur.toString() + " ";
-                cur = cur.next;
+            String rez = "Box: " + id + " color: " + color + " Toys: [ ";
+            if (first != null) {
+                Toy tmp = first;
+                while (tmp.link != null) {
+                    rez += tmp + ", ";
+                    tmp = tmp.link;
+                }
+                rez += tmp + " ]";
+            } else {
+                rez += "Empty! ]";
             }
-            rez += " ]";
             return rez;
         }
-        
     }
 
-    BoxesList boxes;
+    Box first;
 
-    public Igraonica() {
-        this.boxes = new BoxesList();
+    public Playground() {
+        this.first = null;
     }
 
-    public void insertBox(int id, String color) {
-        boxes.insertBox(id, color);
+    private Boolean isThereBox(int id) {
+        Box tmp = first;
+        while (tmp != null) {
+            if (tmp.id == id)
+                return true;
+            tmp = tmp.link;
+        }
+        return false;
     }
 
-    public String isThereBox(int id) {
-        return boxes.isThereBox(id);
-    }
-
-    public void insertToy(int id, String type, String desc) {
-        boxes.insertToy(id, type, desc);
-    }
-
-    public String isThereToy(int id, String type) {
-        return boxes.isThereToy(id, type);
-    }
-
-    // print box with the most of toys given type
-    public void printBoxWithMostToys(String type) {
-        Box cur = boxes.first;
-        int max = 0;
-        while (cur != null) {
-            int count = 0;
-            Toy toys = cur.toys.first;
-            while (toys != null) {
-                if (cur.toys.isThereToy(type) != null) {
-                    count++;
+    public void addBox(int id, String color) {
+        if (first == null || first.id > id) {
+            Box nw = new Box(id, color);
+            nw.link = first;
+            first = nw;
+        } else {
+            if (!isThereBox(id)) {
+                Box tmp = first;
+                while (tmp.link != null && tmp.id < id) {
+                    tmp = tmp.link;
                 }
-                toys = toys.next;
+                Box nw = new Box(id, color);
+                nw.link = tmp.link;
+                tmp.link = nw;
+            } else {
+                System.out.println("[Error] - There is no box with that id! ");
             }
-            if (count > max) {
-                max = count;
-                Svetovid.out.println("Box " + cur.id + " " + cur.color);
-            }
-            cur = cur.next;
         }
     }
 
-    //Move all toys from all the boxes to the last box and delete all boxes, except the last one
-    public void moveToysToLastBox() {
-        Box cur = boxes.first;
-        Box last = null;
-        while (cur != null) {
-            last = cur;
-            cur = cur.next;
-        }
-        cur = boxes.first;
-        while (cur != null) {
-            Toy toys = cur.toys.first;
-            while (toys != null) {
-                last.toys.insertToy(cur.toys.first.type, cur.toys.first.desc);
-                toys = toys.next;
+    public void addToy(int id, String type, String desc) {
+        Box tmp = first;
+        int there = 0;
+        while (tmp != null) {
+            if (tmp.id == id) {
+                if (tmp.first == null || tmp.first.type.compareTo(type) > 0) {
+                    Toy nw = new Toy(type, desc); // nw as new
+                    nw.link = tmp.first;
+                    tmp.first = nw;
+                } else {
+                    Toy hel = tmp.first; // hel as a helper
+                    while (hel.link != null && hel.link.type.compareTo(type) < 0) {
+                        hel = hel.link;
+                    }
+                    Toy nw = new Toy(type, desc);
+                    nw.link = hel.link;
+                    hel.link = nw;
+                }
+                there++;
             }
-            cur = cur.next;
+            tmp = tmp.link;
         }
-        cur = boxes.first;
-        while (cur != null) {
-            Box tmp = cur.next;
-            cur.next = null;
-            cur = tmp;
+        if (!(there > 0)) {
+            System.out.println("[Error] - There is no box with that id! ");
+        }
+    }
+
+    public void printBoxWithMostToysType(String type) {
+        if (first == null) {
+            System.out.println("Box list is empty.");
+            return;
+        }
+        Box tmp = first;
+        int max = 0;
+        Box pom = null;
+        while (tmp != null) {
+            int counter = 0;
+            if (tmp.first != null) {
+                Toy hel = tmp.first;
+                while (hel != null) {
+                    if (hel.type.equalsIgnoreCase(type))
+                        counter++;
+                    hel = hel.link;
+                }
+                if (counter > max) {
+                    max = counter;
+                    pom = tmp;
+                }
+            }
+            tmp = tmp.link;
+        }
+        System.out.println("Box with the most toys of the given type is " + pom);
+    }
+
+    public void moveAllGivenToysToLastBox(String type) {
+        if (first != null) {
+            Box last = first, tmp = first;
+            while (tmp != null) {
+                last = tmp;
+                tmp = tmp.link;
+            }
+            tmp = first;
+            while (tmp != last) {
+                if (tmp.first != null) {
+                    Toy tek = tmp.first, post = tmp.first;
+                    while (tek != null) {
+                        post = tek;
+                        if (tek.type.equalsIgnoreCase(type)) {
+                            if (last.first != null) {
+                                tek.link = last.first.link;
+                                last.first = tek;
+                                tek = post.link;
+                            } else {
+                                last.first = tek;
+                                tek.link = null;
+                                last.first.link = tek.link;
+                                tek = post.link;
+                            }
+                        }
+                        tek = tek.link;
+                    }
+                }
+                tmp = tmp.link;
+            }
+        }
+    }
+
+    // Help by github/vjxdev
+    public void moveTypeToLastBox(String type) {
+        if (first == null || first.link == null) {
+            return;
+        }
+        Box lastBox = first;
+        while (lastBox.link != null) {
+            lastBox = lastBox.link;
+        }
+
+        Box currBox = first;
+        // Prolazak kroz sve kutije
+        while (currBox.link != null) {
+            // Prebacivanje sa pocetka
+            while (currBox.first != null && currBox.first.type.equals(type)) {
+                Toy toyToMove = currBox.first;
+                currBox.first = currBox.first.link;
+
+                toyToMove.link = lastBox.first;
+                lastBox.first = toyToMove;
+            }
+            // Prebacivanje ostatka
+            if (currBox.first != null) {
+                Toy curr = currBox.first, prev;
+                while (curr.link != null) {
+                    prev = curr;
+                    curr = curr.link;
+                    if (curr.type.equals(type)) {
+                        prev.link = curr.link;
+
+
+                        curr.link = lastBox.first;
+                        lastBox.first = curr;
+
+                        curr = prev;
+                    }
+                }
+            }
+
+            currBox = currBox.link;
         }
     }
 
     public String toString() {
-        return boxes.toString();
-    }
+        String rez = "Playground [ ";
+        if (first != null) {
+            Box tmp = first;
+            while (tmp.link != null) {
+                rez += tmp + ", ";
+                tmp = tmp.link;
+            }
+            rez += tmp + " ]";
+        } else {
+            rez += "Empty! ]";
+        }
 
+        return rez;
+    }
 }
