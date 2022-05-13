@@ -35,7 +35,7 @@ public class RacUcionice {
 		//igr.izbaciOpremuIzUcionice(5,"1tastatura");
 		//System.out.println(igr);
 		System.out.println("---------------------------------------");
-		igr.izbaciOpremuIzSvih("1tastatura", "red Dragon");
+		igr.izbaciOpremuIzSvih("1tastatura", "red Dragon", "zelena");
 		System.out.println(igr);
 	}
 }
@@ -300,29 +300,35 @@ class RacunarskeUcionice {
 		}
 	}
 	
-	public void izbaciOpremuIzSvih(String tip, String opis){
+	public void izbaciOpremuIzSvih(String tip, String opis, String boja){
 		if(prva == null)
 			return;
 		Ucionica cur = prva;
 		while(cur != null){
-			if(cur.prva != null){
-				Oprema tek = cur.prva, pred = null;
-				if(tek.tip.equals(tip) && tek.opis.equals(opis)){
-					cur.prva = cur.prva.sledeca;
-				}else{
-					while(tek != null){
-						pred = cur.prva;
-						if(tek.tip.equals(tip) && tek.opis.equals(opis)){
+			if(cur.boja.equalsIgnoreCase(boja)){
+				if(cur.prva != null){
+					if(cur.prva.tip.equalsIgnoreCase(tip) && cur.prva.opis.equalsIgnoreCase(opis)){
+						cur.prva = cur.prva.sledeca;
+					}else {
+						Oprema tek = cur.prva, pred = null;
+						while(tek != null){
+							pred = tek;
+							if(cur.prva.tip.equalsIgnoreCase(tip) && cur.prva.opis.equalsIgnoreCase(opis)){
+								pred = tek.sledeca;
+								tek = tek.sledeca;
+							}
 							tek = tek.sledeca;
-							pred.sledeca = tek.sledeca;
+							
 						}
-						tek = tek.sledeca;
 					}
+					
 				}
 			}
 			cur = cur.sledeca;
 		}
 	}
+	
+	
 	
 	public String toString(){
 		String rez = "Rac ucionica [ ";
