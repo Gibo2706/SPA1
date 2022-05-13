@@ -32,20 +32,9 @@ public class PKVezbeVrsteListi {
             }
         }
         list.remove(3);
-        Boolean isDone = false;
         System.out.println();
         String imeZaIzbacivanje = Svetovid.in.readLine("Unesite ime koje zelite da izbacite: ");
-        for (int i = 0; i < inList; i++) {
-            if (list.get(i).equalsIgnoreCase(imeZaIzbacivanje)) {
-                list.remove(i);
-                isDone = true;
-                break;
-            }
-        }
-        if(isDone)
-            System.out.println("Uspesno ste izbacili ime.");
-        else
-            System.out.println("Nije pronadjeno zadato ime!");
+        list.remove(imeZaIzbacivanje);
         System.out.println("-------------------------------------");
         Svetovid.out.println(list);
         inList = list.size();
@@ -57,6 +46,7 @@ public class PKVezbeVrsteListi {
         Svetovid.out(pathOut).close();
 
         List<String> list2 = new LinkedList<String>();
+        list2.addAll(list);
         pathIn = "files\\input\\Stud10.txt";
         pathOut = "files\\output\\Stud10List.txt";
         if(Svetovid.testIn(pathIn)){
