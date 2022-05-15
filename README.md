@@ -28,3 +28,7 @@
 ## Seste prakticne vezbe
  Izrada prakticnog zadatka; dodatni bodovi  
  Datum 29.04.2022.  
+  
+## Sedme prakticne vezbe
+ Rad sa Array Listama i Linked listama; vezbanje za prakticni  
+ Datum 13.05.2022.  
