@@ -16,7 +16,7 @@ public class PKVezbeVrsteListi {
         list.add(3, "ImeKojeJeDodatoNa2.Mesto");
         Svetovid.out.println(list);
         System.out.println("-------------------------------------");
-        list.set(4, "elementNa4Poziciji");
+        System.out.println(list.set(4, "elementNa4Poziciji")); 
         System.out.println(list.get(4));
         System.out.println("-------------------------------------");
         for (int i = 0; i < inList; i++) {
