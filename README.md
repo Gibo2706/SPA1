@@ -32,3 +32,11 @@
 ## Sedme prakticne vezbe
  Rad sa Array Listama i Linked listama; vezbanje za prakticni  
  Datum 13.05.2022.  
+
+## Osme prakticne vezbe  
+ Izrada prakticnog zadatka; dodatni bodovi  
+ Datum 20.05.2022.  
+
+## Kolokvijum 02  
+ Izrada kolokvijuma online  
+ Datum 27.05.2022.  

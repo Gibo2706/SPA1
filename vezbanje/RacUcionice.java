@@ -310,11 +310,9 @@ class RacunarskeUcionice {
 					if(cur.prva.tip.equalsIgnoreCase(tip) && cur.prva.opis.equalsIgnoreCase(opis)){
 						cur.prva = cur.prva.sledeca;
 					}else {
-						Oprema tek = cur.prva, pred = null;
+						Oprema tek = cur.prva;
 						while(tek != null){
-							pred = tek;
 							if(cur.prva.tip.equalsIgnoreCase(tip) && cur.prva.opis.equalsIgnoreCase(opis)){
-								pred = tek.sledeca;
 								tek = tek.sledeca;
 							}
 							tek = tek.sledeca;
