@@ -74,17 +74,17 @@ public class Zad04 {
             }
         }
         System.out.println(stekIntDrugi);
-
-
         System.out.println();
         System.out.println(stekIntPrvi);
         System.out.println(stekIntDrugi);
         // 2.d
         Stek<Integer> spojeni = new Stek<Integer>();
-        if(!stekIntDrugi.jePrazan() && !stekIntPrvi.jePrazan()){
+        if(!stekIntDrugi.jePrazan() || !stekIntPrvi.jePrazan()){
             while((!stekIntDrugi.jePrazan() || !stekIntPrvi.jePrazan()) && !spojeni.jePun()){
-                spojeni.stavi(stekIntPrvi.skiniVrh());
-                spojeni.stavi(stekIntDrugi.skiniVrh());
+                if(!stekIntDrugi.jePrazan())
+                    spojeni.stavi(stekIntDrugi.skiniVrh());
+                if(!stekIntPrvi.jePrazan())
+                    spojeni.stavi(stekIntPrvi.skiniVrh());
             }
         }
         System.out.println(spojeni);
