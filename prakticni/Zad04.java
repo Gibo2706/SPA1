@@ -71,6 +71,10 @@ public class Zad04 {
                     stekIntDrugi.stavi(pom);
                     break;
                 }
+                if (pom % 2 == 1 && stekIntDrugi.vrh() % 2 == 1) {
+                    stekIntDrugi.stavi(pom);
+                    break;
+                }
             }
         }
         System.out.println(stekIntDrugi);
