@@ -8,5 +8,6 @@ public class StekVezbanje {
             stek.stavi(Svetovid.in.readInt());
         }
         System.out.println(stek);
+        
     }
 }
